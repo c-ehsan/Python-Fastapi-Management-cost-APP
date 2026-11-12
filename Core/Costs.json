@@ -1,0 +1,26 @@
+[
+    {
+        "id": 177,
+        "description": "Laptop",
+        "amount": 2500.5,
+        "Authority": "857106b3-6498-4bc7-a11c-95124a51e254"
+    },
+    {
+        "id": 304,
+        "description": "Book",
+        "amount": 30.5,
+        "Authority": "a0a8a2d3-09e7-4ef9-b32a-bbadbfdaceea"
+    },
+    {
+        "id": 989,
+        "description": "Food",
+        "amount": 15.0,
+        "Authority": "6f9bdd55-5d6e-404f-9e61-46e27f04d9f0"
+    },
+    {
+        "id": 940,
+        "description": "Mobile",
+        "amount": 1200.0,
+        "Authority": "cff528b8-8c17-4f74-9730-accef0dd1bf5"
+    }
+]

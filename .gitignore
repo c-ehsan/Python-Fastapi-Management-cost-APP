@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+#Mac Environment variables
+.DS_Store
+
+#Initialize Python file
+__init__.py
+
 # Distribution / packaging
 .Python
 build/
