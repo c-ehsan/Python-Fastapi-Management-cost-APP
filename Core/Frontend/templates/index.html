@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد مدیریت هزینه</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+        <h2>سیستم مدیریت هزینه</h2>
+
+        <nav>
+            <a href="/">داشبورد</a>
+            <a href="/expenses">لیست هزینه‌ها</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <h1>خوش آمدید 👋</h1>
+            <p>به پنل مدیریت هزینه‌های خود خوش آمدید.</p>
+        </section>
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <h3>مجموع هزینه‌ها</h3>
+                <p id="totalAmount">در حال محاسبه...</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>تعداد تراکنش‌ها</h3>
+                <p id="totalTransactions">{{ costs|length }}</p>
+            </div>
+
+        </section>
+
+        <section class="recent-expenses">
+
+            <div class="section-header">
+                <h2>آخرین هزینه‌ها</h2>
+                <a href="/expenses">مشاهده همه</a>
+            </div>
+
+            <table id="expensesTable">
+
+                <thead>
+                    <tr>
+                        <th>شناسه</th>
+                        <th>توضیحات</th>
+                        <th>مبلغ</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for cost in costs[:5] %}
+
+                    <tr>
+                        <td>{{ cost.id }}</td>
+
+                        <td class="expense-description">
+                            {{ cost.description }}
+                        </td>
+
+                        <td class="expense-amount"
+                            data-amount="{{ cost.amount }}">
+                            {{ "{:,.0f}".format(cost.amount) }} تومان
+                        </td>
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="3">
+                            هنوز هزینه‌ای ثبت نشده است.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <div class="actions">
+            <a href="/expenses" class="btn">
+                مدیریت هزینه‌ها
+            </a>
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', path='app.js') }}"></script>
+
+</body>
+</html>

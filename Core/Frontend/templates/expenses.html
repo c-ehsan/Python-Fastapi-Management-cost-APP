@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لیست هزینه‌ها</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body>
+
+    <header class="header">
+        <h2>سیستم مدیریت هزینه</h2>
+
+        <nav>
+            <a href="/">داشبورد</a>
+            <a href="/expenses">لیست هزینه‌ها</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <h1>مدیریت هزینه‌ها</h1>
+            <p>در این بخش می‌توانید تمام هزینه‌های ثبت‌شده را مشاهده کنید.</p>
+        </section>
+
+
+
+<section class="expense-form-section">
+
+    <h2>ثبت هزینه جدید</h2>
+
+    <form id="createExpenseForm">
+
+        <div class="form-group">
+            <label for="description">توضیحات</label>
+            <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="مثلاً خرید کتاب"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="amount">مبلغ (تومان)</label>
+            <input
+                type="number"
+                id="amount"
+                name="amount"
+                placeholder="مبلغ هزینه"
+                min="1"
+                required
+            >
+        </div>
+
+        <button type="submit" class="submit-btn">
+            ثبت هزینه
+        </button>
+
+    </form>
+
+</section>
+
+
+        <section class="expense-controls">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="جستجو بر اساس توضیحات..."
+            >
+
+        </section>
+
+        <section class="expenses-list">
+
+            <table id="expensesTable">
+
+                <thead>
+                    <tr>
+                        <th>شناسه</th>
+                        <th>توضیحات</th>
+                        <th>مبلغ</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for cost in costs %}
+
+                    <tr>
+
+                        <td>{{ cost.id }}</td>
+
+                        <td class="expense-description">
+                            {{ cost.description }}
+                        </td>
+
+                        <td class="expense-amount"
+                            data-amount="{{ cost.amount }}">
+                            {{ "{:,.0f}".format(cost.amount) }} تومان
+                        </td>
+
+                        <td>
+                            <button
+                                class="delete-expense"
+                                data-id="{{ cost.id }}">
+                                حذف
+                            </button>
+                            <button
+                                class="edit-expense"
+                                data-id="{{ cost.id }}"
+                                data-description="{{ cost.description }}"
+                                data-amount="{{ cost.amount }}">
+                                ویرایش
+                            </button>
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="4">
+                            هیچ هزینه‌ای ثبت نشده است.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <div class="actions">
+            <a href="/" class="btn">
+                بازگشت به داشبورد
+            </a>
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', path='app.js') }}"></script>
+
+</body>
+</html>

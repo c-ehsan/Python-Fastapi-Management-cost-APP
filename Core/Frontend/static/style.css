@@ -1,0 +1,572 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+/* =================================
+   1. Design System
+================================= */
+
+:root {
+    --background: #0b1120;
+    --surface: #151e30;
+    --surface-light: #1c2940;
+    --surface-hover: #202e47;
+
+    --primary: #8b7cf6;
+    --primary-hover: #7969e8;
+    --primary-soft: rgba(139, 124, 246, 0.12);
+
+    --success: #34d399;
+    --success-soft: rgba(52, 211, 153, 0.1);
+
+    --danger: #fb7185;
+    --danger-soft: rgba(251, 113, 133, 0.1);
+
+    --info: #60a5fa;
+    --info-soft: rgba(96, 165, 250, 0.1);
+
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --border: rgba(148, 163, 184, 0.12);
+
+    --radius: 16px;
+    --radius-small: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    min-height: 100vh;
+    direction: rtl;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+/* =================================
+   2. Header
+================================= */
+
+.header {
+    width: 100%;
+    min-height: 78px;
+    padding: 14px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    background: rgba(21, 30, 48, 0.9);
+    border-bottom: 1px solid var(--border);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.header h2 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: 0.25s ease;
+}
+
+.header nav a:hover {
+    color: var(--primary);
+    background: var(--primary-soft);
+}
+
+/* =================================
+   3. Main Layout
+================================= */
+
+.container {
+    width: min(1100px, 88%);
+    margin: 45px auto 70px;
+}
+
+/* =================================
+   4. Welcome
+================================= */
+
+.welcome {
+    margin-bottom: 32px;
+}
+
+.welcome h1 {
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 5px;
+}
+
+.welcome p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* =================================
+   5. Dashboard Statistics
+================================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    position: relative;
+    overflow: hidden;
+    padding: 25px 27px;
+
+    background: linear-gradient(145deg, #19243a, #141d2e);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    transition: 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(139, 124, 246, 0.4);
+}
+
+.stat-card h3 {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.stat-card p {
+    color: var(--primary);
+    font-size: 27px;
+    font-weight: 800;
+}
+
+/* =================================
+   6. Expense Form
+================================= */
+
+.expense-form-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px;
+    margin-bottom: 28px;
+}
+
+.expense-form-section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+# createExpenseForm {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-small);
+
+    color: var(--text-primary);
+    font-size: 13px;
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.submit-btn {
+    grid-column: 1 / -1;
+    min-height: 46px;
+
+    background: var(--primary);
+    color: white;
+
+    border: none;
+    border-radius: var(--radius-small);
+
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.submit-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* =================================
+   7. Content Sections
+================================= */
+
+.recent-expenses,
+.expenses-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 25px;
+    margin-bottom: 28px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.section-header a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.section-header a:hover {
+    color: white;
+}
+
+/* =================================
+   8. Search
+================================= */
+
+.expense-controls {
+    margin-bottom: 22px;
+}
+
+.expense-controls input {
+    width: 100%;
+    max-width: 420px;
+    height: 48px;
+    padding: 0 16px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-small);
+
+    color: var(--text-primary);
+    font-size: 13px;
+    outline: none;
+
+    transition: 0.25s ease;
+}
+
+.expense-controls input::placeholder {
+    color: var(--text-muted);
+}
+
+.expense-controls input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+/* =================================
+   9. Tables
+================================= */
+
+.recent-expenses,
+.expenses-list {
+    overflow-x: auto;
+}
+
+.recent-expenses table,
+.expenses-list table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+thead {
+    background: var(--surface-light);
+}
+
+th {
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 15px 18px;
+    white-space: nowrap;
+}
+
+td {
+    color: #cbd5e1;
+    font-size: 13px;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: var(--surface-hover);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.expense-amount {
+    color: var(--success);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.expense-description {
+    color: var(--text-primary);
+}
+
+/* =================================
+   10. Edit & Delete Buttons
+================================= */
+
+.edit-expense,
+.delete-expense {
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.edit-expense {
+    background: var(--info-soft);
+    color: var(--info);
+    border: 1px solid rgba(96, 165, 250, 0.18);
+}
+
+.edit-expense:hover {
+    background: var(--info);
+    color: white;
+}
+
+.delete-expense {
+    background: var(--danger-soft);
+    color: var(--danger);
+    border: 1px solid rgba(251, 113, 133, 0.18);
+}
+
+.delete-expense:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* =================================
+   11. Navigation Actions
+================================= */
+
+.actions {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 25px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 22px;
+    background: var(--primary);
+    color: white;
+
+    border-radius: var(--radius-small);
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.btn:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 5px 20px rgba(139, 124, 246, 0.2);
+    transform: translateY(-2px);
+}
+
+/* =================================
+   12. Responsive
+================================= */
+
+@media (max-width: 768px) {
+
+    .header {
+        padding: 14px 5%;
+        flex-wrap: wrap;
+    }
+
+    .container {
+        width: 92%;
+        margin-top: 30px;
+    }
+
+    .welcome h1 {
+        font-size: 23px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .expense-form-section {
+        padding: 20px;
+    }
+
+    #createExpenseForm {
+        grid-template-columns: 1fr;
+    }
+
+    .recent-expenses,
+    .expenses-list {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .header nav {
+        width: 100%;
+    }
+
+    .header nav a {
+        padding: 7px 12px;
+    }
+
+    .welcome h1 {
+        font-size: 21px;
+    }
+
+    .stat-card {
+        padding: 21px;
+    }
+
+    .stat-card p {
+        font-size: 23px;
+    }
+
+    .section-header h2 {
+        font-size: 16px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+
+.cancel-btn {
+    min-height: 46px;
+    padding: 10px 20px;
+
+    background: transparent;
+    color: var(--text-secondary);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-small);
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.cancel-btn:hover {
+    background: var(--surface-light);
+    color: white;
+}
+
+.cancel-btn:disabled,
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.table-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
