@@ -4,7 +4,8 @@ from fastapi.responses import JSONResponse
 from uuid import uuid4
 from .data import DataLoader
 from typing import Optional
-from Schemas.schemas import BaseCostSchema , CostRequestSchema , CostResponseSchema, CostListResponseSchema , CostSchema
+from Core.Backend.Schemas.schemas  import BaseCostSchema  , CostResponseSchema, CostListResponseSchema , CostSchema
+
 import random
 import uvicorn
 
@@ -16,12 +17,16 @@ class FastApiProvider:
 
 
 
+    def get_costs(self):
+        return self.__data
+
+
+
 
     def create_relative_routes(self):
 
-
         # GET METHODS
-        @self.app.get("/costs",response_model=CostResponseSchema)
+        @self.app.get("/costs",response_model=CostListResponseSchema)
         def get_all_costs():
             if self.__data:
                 return {
@@ -85,7 +90,7 @@ class FastApiProvider:
 
 
         @self.app.put("/costs/{item_id}",response_model=CostResponseSchema)
-        def update_item(item_id:int,cost:CostResponseSchema):
+        def update_item(item_id:int,cost:CostSchema):
             for item in self.__data:
                 if item["id"]==item_id:
                     item["description"]=cost.description
@@ -110,6 +115,6 @@ class FastApiProvider:
 
 
     def run(self):
-        uvicorn.run(app=self.app,host="0.0.0.0",port=5000,reload=True)
+        uvicorn.run(app=self.app,host="0.0.0.0",port=5000)
 
 
