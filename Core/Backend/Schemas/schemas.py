@@ -1,5 +1,6 @@
 #import libraries and create global variables 
 from pydantic import BaseModel ,Field , ConfigDict
+#hint: to request infos like post , put,delete we must use Costschema for send client data ofcourse to get_response  for client like get(with internal item),search , get all costs we must use Response_models like Cost Response Schema and etc,...
 
 #Base Schema
 class BaseSchema(BaseModel):
@@ -11,9 +12,12 @@ class BaseSchema(BaseModel):
 #CostBaseSchema
 
 class BaseCostSchema(BaseSchema):
-    amount:float
+    amount:float=Field(description="Your Amount:")
 
 
+#Request Schema
+class CostSchema(BaseCostSchema):
+    description:str=Field(description="Your Product Name:")
 
 class CostResponseSchema(BaseSchema):
     id:int=Field(description="Your ID:")
