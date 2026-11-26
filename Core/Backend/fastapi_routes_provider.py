@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from uuid import uuid4
 from .data import DataLoader
 from typing import Optional
-from Schemas.schemas import BaseCostSchema , CostRequestSchema , CostResponseSchema, CostListResponseSchema
+from Schemas.schemas import BaseCostSchema , CostRequestSchema , CostResponseSchema, CostListResponseSchema , CostSchema
 import random
 import uvicorn
 
@@ -72,36 +72,37 @@ class FastApiProvider:
 
          
      
-        @self.app.post("/costs")
-        def post_new_item(description:str,amount:float):
-            new_items={"id":random.randint(1,1000),"description":description,"amount":amount,"Authority":str(uuid4())}
+        @self.app.post("/costs",response_model=CostResponseSchema)
+        def post_new_item(cost:CostSchema):
+            new_items={"id":random.randint(1,1000),"description":cost.description,"amount":cost.amount,"Authority":str(uuid4())}
             if new_items:
                 self.__data.append(new_items)
                 self.__loader.save_data(self.__data)
-                return JSONResponse(content=new_items,status_code=status.HTTP_201_CREATED)
+                return new_items
+
             raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 
-        @self.app.put("/costs/{item_id}")
-        def update_item(item_id:int,new_description:str,new_amount:float):
+        @self.app.put("/costs/{item_id}",response_model=CostResponseSchema)
+        def update_item(item_id:int,cost:CostResponseSchema):
             for item in self.__data:
                 if item["id"]==item_id:
-                    item["description"]=new_description
-                    item["amount"]=new_amount
+                    item["description"]=cost.description
+                    item["amount"]=cost.amount
                     self.__loader.save_data(self.__data)
 
-                    return JSONResponse(content=item , status_code=status.HTTP_200_OK)
+                    return item
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
 
-        @self.app.delete("/costs/{item_id}")
+        @self.app.delete("/costs/{item_id}",response_model=CostResponseSchema)
         def delete_item(item_id:int):
             for item in self.__data:
                 if item["id"]==item_id:
                     self.__data.remove(item)
                     self.__loader.save_data(self.__data)
-                    return JSONResponse(content=item , status_code=status.HTTP_204_NO_CONTENT)
+                    return item 
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         
 
