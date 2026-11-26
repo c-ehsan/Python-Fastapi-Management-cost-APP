@@ -32,7 +32,8 @@
 
             <div class="stat-card">
                 <h3>مجموع هزینه‌ها</h3>
-                <p id="totalAmount">در حال محاسبه...</p>
+                <p id="totalAmount">{{ "{:,.0f}".format(costs | sum(attribute='amount')) }}
+        تومان</p>
             </div>
 
             <div class="stat-card">
